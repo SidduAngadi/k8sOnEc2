@@ -13,10 +13,10 @@ pipeline {
                       parameters([
                           extendedChoice( 
                               name: 'Terraform_Action', 
-                              defaultValue: 'Plan', 
+                              defaultValue: 'llan', 
                               description: 'Terraform action to be selected.', 
                               type: 'PT_SINGLE_SELECT',
-                              value: 'Plan, Apply, Destroy'
+                              value: 'plan, apply, destroy'
                           ),
                           extendedChoice( 
                               name: 'modules', 
