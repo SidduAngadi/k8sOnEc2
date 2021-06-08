@@ -1,5 +1,5 @@
 module "vpc" {
-    source = "../../../terraform_modules/vpc_core"
+    source = "../../../modules/vpc_core"
 
     env_name = "dev"
     resource_static_name = "siddu"
@@ -25,7 +25,7 @@ module "vpc" {
 }
 
 module "sec_group" {
-    source = "../../../terraform_modules/security_grp_rules"
+    source = "../../../modules/security_grp_rules"
     security_group_id = module.vpc.vpce_endpoint_sg_id
     security_group_rules = {
         # type = from_port,to_port,protocol,cidr_blocks 

@@ -1,5 +1,5 @@
 module "controlPanel" {
-    source = "../../../terraform_modules/auto-scaling-group"
+    source = "../../../modules/auto-scaling-group"
 
     env_name = "dev"
     resource_static_name = "controlPanel"
@@ -10,7 +10,7 @@ module "controlPanel" {
 }
 
 module "sec_group" {
-    source = "../../../terraform_modules/security_grp_rules"
+    source = "../../../modules/security_grp_rules"
     security_group_id = module.controlPanel.security_group_id
     security_group_rules = {
         # type = from_port,to_port,protocol,cidr_blocks 
@@ -19,7 +19,7 @@ module "sec_group" {
 }
 
 module "sec_group_ssh" {
-    source = "../../../terraform_modules/security_grp_rules"
+    source = "../../../modules/security_grp_rules"
     for_each = toset(data.terraform_remote_state.vpc.outputs.public_cidr_block)
     security_group_id = module.controlPanel.security_group_id
     security_group_rules = {
