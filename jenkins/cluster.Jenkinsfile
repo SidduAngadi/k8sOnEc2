@@ -10,7 +10,7 @@ pipeline {
                               name: 'Terraform_Action', 
                               defaultValue: 'Plan', 
                               description: 'Terraform action to be selected.', 
-                              type: 'PT_SINGLE_SELECT'
+                              type: 'PT_SINGLE_SELECT',
                               value: 'Plan, Apply, Destroy'
                           )
                       ])
