@@ -34,6 +34,32 @@ pipeline {
           }
           steps {
                   sh """
+                  echo "deploy to ${modules}"
+                  """
+          }
+        }
+
+        stage('02_jump_box'){
+          when {
+            expression { 
+                return params.Terraform_Action == 'Plan'
+            }
+          }
+          steps {
+                  sh """
+                  echo "deploy to production"
+                  """
+          }
+        }
+
+        stage('03_k8s_cluster'){
+          when {
+            expression { 
+                return params.Terraform_Action == 'Plan'
+            }
+          }
+          steps {
+                  sh """
                   echo "deploy to production"
                   """
           }
