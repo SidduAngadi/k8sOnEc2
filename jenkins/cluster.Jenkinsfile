@@ -41,7 +41,7 @@ pipeline {
           }
           steps {
             echo "Executing step 01_network ==================================================="
-            def runTerraform(${Terraform_Action}, '01_network')
+            def runTerraform( "${Terraform_Action}", '01_network')
           }
         }
 
@@ -53,7 +53,7 @@ pipeline {
           }
           steps {
               echo "Executing step 02_jump_box ==================================================="
-              def runTerraform(${Terraform_Action}, '02_jump_box')
+              def runTerraform( "${Terraform_Action}", '02_jump_box')
           }
         }
 
@@ -65,7 +65,7 @@ pipeline {
           }
           steps {
             echo "Executing step 03_k8s_cluster ==================================================="
-            def runTerraform(${Terraform_Action}, '03_k8s_cluster')
+            def runTerraform( "${Terraform_Action}", '03_k8s_cluster')
           }
         }
     }   
