@@ -1,3 +1,8 @@
+def choice=[]
+node {
+    choice = params["modules"].split(",")
+}
+
 pipeline {
     agent any
     stages {
@@ -13,13 +18,13 @@ pipeline {
                               type: 'PT_SINGLE_SELECT',
                               value: 'Plan, Apply, Destroy'
                           ),
-                          choice( 
+                          extendedChoice( 
                               name: 'modules', 
                               // defaultValue: '01_network, 02_jump_box, 03_k8s_cluster', 
-                              description: 'select stages to deploy', 
-                              // type: 'PT_MULTI_SELECT',
-                              choices: '01_network, 02_jump_box, 03_k8s_cluster',
-                              // visibleItemCount: 3
+                              description: 'select modules to deploy', 
+                              type: 'PT_CHECKBOX',
+                              value: '01_network,02_jump_box,03_k8s_cluster',
+                              visibleItemCount: 3
                           )
                       ])
                   ])
@@ -31,39 +36,36 @@ pipeline {
           
           when {
             expression { 
-                return params.Terraform_Action == 'Plan'
+                return '01_network' in choice
             }
           }
           steps {
-                  sh """
-                  echo "deploy to ${modules}"
-                  """
+            echo "Executing step 01_network ==================================================="
+            def runTerraform(${Terraform_Action}, '01_network')
           }
         }
 
         stage('02_jump_box'){
           when {
             expression { 
-                return params.Terraform_Action == 'Plan'
+                return '02_jump_box' in choice
             }
           }
           steps {
-                  sh """
-                  echo "deploy to production"
-                  """
+              echo "Executing step 02_jump_box ==================================================="
+              def runTerraform(${Terraform_Action}, '02_jump_box')
           }
         }
 
         stage('03_k8s_cluster'){
           when {
             expression { 
-                return params.Terraform_Action == 'Plan'
+                return '03_k8s_cluster' in choice
             }
           }
           steps {
-                  sh """
-                  echo "deploy to production"
-                  """
+            echo "Executing step 03_k8s_cluster ==================================================="
+            def runTerraform(${Terraform_Action}, '03_k8s_cluster')
           }
         }
     }   
