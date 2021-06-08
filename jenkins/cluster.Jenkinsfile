@@ -13,12 +13,13 @@ pipeline {
                               type: 'PT_SINGLE_SELECT',
                               value: 'Plan, Apply, Destroy'
                           ),
-                          extendedChoice( 
+                          choice( 
                               name: 'modules', 
-                              defaultValue: '01_network, 02_jump_box, 03_k8s_cluster', 
+                              // defaultValue: '01_network, 02_jump_box, 03_k8s_cluster', 
                               description: 'select stages to deploy', 
-                              type: 'PT_MULTI_SELECT',
-                              value: '01_network, 02_jump_box, 03_k8s_cluster'
+                              // type: 'PT_MULTI_SELECT',
+                              choices: '01_network, 02_jump_box, 03_k8s_cluster',
+                              // visibleItemCount: 3
                           )
                       ])
                   ])
@@ -27,7 +28,7 @@ pipeline {
         }
 
         stage('01_network'){
-          def modulesArr = params.modules.tokenize( ',' )
+          
           when {
             expression { 
                 return params.Terraform_Action == 'Plan'
@@ -35,7 +36,7 @@ pipeline {
           }
           steps {
                   sh """
-                  echo "deploy to ${modulesArr}"
+                  echo "deploy to ${modules}"
                   """
           }
         }
