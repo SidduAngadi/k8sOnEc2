@@ -34,7 +34,7 @@ pipeline {
           }
           steps {
                   sh """
-                  echo "deploy to ${modules}"
+                  echo "deploy to ${modules}.tokenize( '-' )"
                   """
           }
         }
