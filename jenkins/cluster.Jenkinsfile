@@ -27,6 +27,7 @@ pipeline {
         }
 
         stage('01_network'){
+          def modulesArr = params.modules.tokenize( ',' )
           when {
             expression { 
                 return params.Terraform_Action == 'Plan'
@@ -34,7 +35,7 @@ pipeline {
           }
           steps {
                   sh """
-                  echo "deploy to ${modules}.tokenize( '-' )"
+                  echo "deploy to ${modulesArr}"
                   """
           }
         }
