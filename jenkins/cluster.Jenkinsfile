@@ -83,7 +83,7 @@ def runTerraform(action, module) {
       export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       /Users/Siddu/CustomApps/terraform init
-      /Users/Siddu/CustomApps/terraform ${action}
+      /Users/Siddu/CustomApps/terraform ${action} -auto-approve=true
       """
         
     }
