@@ -72,18 +72,20 @@ pipeline {
 }
 
 def runTerraform(action, module) {
-  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws', accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-  {      
-    // ### runt he terrform function 
-    sh script: """
-    cd terraform/env_defn/dev/${module}
-    export AWS_DEFAULT_REGION=eu-west-1
-    export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-    /Users/Siddu/CustomApps/terraform init
-    /Users/Siddu/CustomApps/terraform ${action}
-    """
-      
+  ansiColor('xterm') {
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws', accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+              secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+    {      
+      // ### runt he terrform function 
+      sh script: """
+      cd terraform/env_defn/dev/${module}
+      export AWS_DEFAULT_REGION=eu-west-1
+      export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      /Users/Siddu/CustomApps/terraform init
+      /Users/Siddu/CustomApps/terraform ${action}
+      """
+        
+    }
   }
 }
