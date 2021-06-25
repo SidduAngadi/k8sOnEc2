@@ -1,5 +1,5 @@
 module "vpc" {
-    source = "../../../modules/vpc_core"
+    source = "git@github.com:SidduAngadi/terraform_modules.git//vpc_core?ref=v0.0.1"
 
     env_name = "dev"
     resource_static_name = "siddu"
