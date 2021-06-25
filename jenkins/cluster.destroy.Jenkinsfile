@@ -34,7 +34,7 @@ pipeline {
           }
           steps {
             echo "Executing step 01_k8s_cluster ==================================================="
-            runTerraform( "destroy", '01_k8s_cluster')
+            runTerraform( "destroy", '03_k8s_cluster')
           }
         }
 
@@ -58,7 +58,7 @@ pipeline {
           }
           steps {
             echo "Executing step 03_network ==================================================="
-            runTerraform( "destroy", '03_network')
+            runTerraform( "destroy", '01_network')
           }
         }
     }   
