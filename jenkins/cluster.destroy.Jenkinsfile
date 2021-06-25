@@ -29,7 +29,7 @@ pipeline {
           
           when {
             expression { 
-                return '01_network' in choice
+                return '01_k8s_cluster' in choice
             }
           }
           steps {
@@ -50,7 +50,7 @@ pipeline {
           }
         }
 
-        stage(''){
+        stage('03_network'){
           when {
             expression { 
                 return '03_network' in choice
