@@ -77,7 +77,7 @@ def runTerraform(action, module) {
               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
     {      
       // ### run the terrform function
-      if (action.equals('apply')) {
+      if (action == 'apply') {
         action = 'apply -auto-approve=true'
       }
       sh script: """
