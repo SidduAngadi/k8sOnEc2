@@ -25,7 +25,8 @@ module "vpc" {
 }
 
 module "sec_group" {
-    source = "../../../modules/security_grp_rules"
+    source = "git@github.com:SidduAngadi/terraform_modules.git//security_grp_rules?ref=v0.0.1"
+    
     security_group_id = module.vpc.vpce_endpoint_sg_id
     security_group_rules = {
         # type = from_port,to_port,protocol,cidr_blocks 
