@@ -70,16 +70,13 @@ def runTerraform(action, module) {
               secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
     {      
       // ### run the terrform function
-      if (action == 'apply') {
-        action = 'apply -auto-approve=true'
-      }
       sh script: """
       cd terraform/env_defn/dev/${module}
       export AWS_DEFAULT_REGION=eu-west-1
       export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       /Users/Siddu/CustomApps/terraform init
-      /Users/Siddu/CustomApps/terraform ${action} 
+      /Users/Siddu/CustomApps/terraform ${action} -auto-approve=true
       """
         
     }
